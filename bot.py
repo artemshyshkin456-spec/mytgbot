@@ -912,6 +912,9 @@ async def main():
     await site.start()
     print(f"HTTP веб-сервер запущен на порту {port}")
 
+    # Сбрасываем старый вебхук, чтобы не было конфликта при поллинге
+    await bot.delete_webhook(drop_pending_updates=True)
+
     # Запуск Telegram поллинга
     await dp.start_polling(bot)
 
